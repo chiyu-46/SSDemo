@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+        <!--Struts2 与 Spring 集成方式1：在 Struts 2 Action 类中访问 Spring 的 bean。
+        默认情况下，Spring 侦听器启用“通过匹配 bean 名称自动装配”。
+        因此，它会自动通过setUserBo()将 Spring 的“ userBo ” bean传递到 UserAction 中。-->
+        <action name="userAction"
+                class="com.chiyu.user.action.UserAction" >
+            <result name="success">pages/user.jsp</result>
+        </action>
+
+        <!--Struts2 与 Spring 集成方式2：使用 Spring 的通用WebApplicationContextUtils类直接获取 Spring 的 bean。-->
+        <action name="userAnotherAction"
+                class="com.chiyu.user.action.UserAnotherAction" >
+            <result name="success">pages/user.jsp</result>
+        </action>
+
+        <!--Struts2 与 Spring 集成方式3：让SpringBean充当Struts 2 Action类，访问的是Spring的bean。
+        在本例中，userSpringAction充当 Struts 2 Action 类，您可以使用普通 Spring 的方式DI Spring 的userBo bean。-->
+        <action name="userSpringAction"
+                class="userSpringActionBean" >
+            <result name="success">pages/user.jsp</result>
+        </action>
+
+    </package>
+
+</struts>
